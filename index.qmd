@@ -1,11 +1,27 @@
 ---
-title: "dalton-garcia-portfolio"
+title: "Dalton Garcia"
+about: 
+  template: jolla
+  image: dg-profile.jpg
+  links:
+    - icon: linkedin
+    - text: LinkedIn
+    - href: https://www.linkedin.com/in/dalton-garcia-a63434307/
+    - icon: github
+    - text: Github
+    - href: https://github.com/dalton90
 ---
 
-This is a Quarto website.
+Dalton Garcia is a third-year Statistics and Data Science student at California State University, Monterey Bay. Along with being a full time student, Dalton coaches youth ice hockey.
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+## Education
 
-```{r}
-1 + 1
-```
+Western New England University \| Springfield, MA
+
+Attended, 2022-2024
+
+California State University, Monterey Bay \| Seaside, CA \| B.S. in Statistics and Data Science \| Expected May 2027
+
+## Experience
+
+Cupertino Cougars Ice Hockey \| 12U Head Coach \| August 2024 - present
