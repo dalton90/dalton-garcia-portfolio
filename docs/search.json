@@ -26,5 +26,26 @@
     "title": "Dalton Garcia",
     "section": "Experience",
     "text": "Experience\nCupertino Cougars Ice Hockey | 12U Head Coach | August 2024 - present"
+  },
+  {
+    "objectID": "portfolio-pt1/Portfolio_pt1/Portofolio_pt1.html",
+    "href": "portfolio-pt1/Portfolio_pt1/Portofolio_pt1.html",
+    "title": "Portfolio Part 1 Plan",
+    "section": "",
+    "text": "My data source is from tidytuesdays and it is a set on Himalayan climbing expeditions.\nThe three datasets consist of Himalayan peak, expedition, and members information. We will only be focusing on the peak and expedition datasets.\nMy research questions that I hope to answer are:\n\n\nWhat Himalayan peaks have the highest summit/survival rate? (Which mountains have been climbed the most with the least amount of deaths?)\nWhat time of the year has the most successful summits? (No injuries/deaths)\nWhat peak has the quickest average successful summits?"
+  },
+  {
+    "objectID": "portfolio-pt1/Portfolio_pt1/Portofolio_pt1.html#data-description",
+    "href": "portfolio-pt1/Portfolio_pt1/Portofolio_pt1.html#data-description",
+    "title": "Portfolio Part 1 Plan",
+    "section": "",
+    "text": "My data source is from tidytuesdays and it is a set on Himalayan climbing expeditions.\nThe three datasets consist of Himalayan peak, expedition, and members information. We will only be focusing on the peak and expedition datasets.\nMy research questions that I hope to answer are:\n\n\nWhat Himalayan peaks have the highest summit/survival rate? (Which mountains have been climbed the most with the least amount of deaths?)\nWhat time of the year has the most successful summits? (No injuries/deaths)\nWhat peak has the quickest average successful summits?"
+  },
+  {
+    "objectID": "portfolio-pt1/Portfolio_pt1/Portofolio_pt1.html#data-visualization",
+    "href": "portfolio-pt1/Portfolio_pt1/Portofolio_pt1.html#data-visualization",
+    "title": "Portfolio Part 1 Plan",
+    "section": "Data Visualization",
+    "text": "Data Visualization\n\n\n\n\nInteractive bar chart that displays sucessful summit rate and has the statistics of # of summits and # of deaths when hovered on.\nHeatmap by month with a gradient color palette denoting an increase of deaths/accidents.\nPerhaps 1 visualization of the quickest summits and then 1 visualization of the safest summits. ## Data Cleaning\n\n\nDo you need to filter your data? How? I will have to filter my expeditions by termination reason. For those expedition of success, I must filter this variable to only include those. This also applies for the expeditions where anyone got injured or died.\nDo you need to create any new variables? What variables? How? Yes, I need to create a duration variable. I will take the difference of the “highpoint_date”/termination_date” and basecamp_data” to find the duration of the trek.\nDo you need to add new data (join) to your data? What data? How? I must join my peak dataset with my expedition dataset. I will do this with a left join with the “peak_name” variable."
   }
 ]
