@@ -4,10 +4,10 @@ about:
   template: jolla
   image: dg-profile.jpg
   links:
-    - icon: linkedin
+    -icon: linkedin
      text: LinkedIn
      href: https://www.linkedin.com/in/dalton-garcia-a63434307/
-    - icon: github
+    -icon: github
      text: Github
      href: https://github.com/dalton90
 ---
