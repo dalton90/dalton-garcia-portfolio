@@ -1,10 +1,38 @@
 [
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site:\nHi, my name is Dalton Garcia and I am a third year Statistics and Data Science major. In my free time, I enjoy playing hockey, surfing, and being outdoors!"
+    "objectID": "portfolio-project1/Portofolio_pt1.html#data-description",
+    "href": "portfolio-project1/Portofolio_pt1.html#data-description",
+    "title": "Project: Analyzing The Himalayan Mountain Range",
+    "section": "Data Description",
+    "text": "Data Description\nMy data source is from tidytuesdays and it is a set on Himalayan climbing expeditions (1905-2019). The three datasets consist of Himalayan peak, expedition, and members information. We will only be focusing on the peak and expedition datasets.\nMy research questions that I hope to answer are:\n\nWhat peaks are the most popular among the Himalayas?\nWhat Himalayan peaks have the highest summit/survival rate? (Which mountains have been climbed the most with the least amount of deaths?)\nWhat time of the year has the most successful summits? (No injuries/deaths)"
+  },
+  {
+    "objectID": "portfolio-project1/Portofolio_pt1.html#data-cleaning",
+    "href": "portfolio-project1/Portofolio_pt1.html#data-cleaning",
+    "title": "Project: Analyzing The Himalayan Mountain Range",
+    "section": "Data Cleaning",
+    "text": "Data Cleaning\nAfter loading in the data and before starting my analysis, I first added a column to the data set to denote if a climb was successful. After, I joined the peak and expedition dataset to create a singular dataset. I then created a few more variables, total expeditions, successful summits, death on treks, and then calculated the summit and death rates to use in my analysis."
+  },
+  {
+    "objectID": "portfolio-project1/Portofolio_pt1.html#visualization-1",
+    "href": "portfolio-project1/Portofolio_pt1.html#visualization-1",
+    "title": "Project: Analyzing The Himalayan Mountain Range",
+    "section": "Visualization 1",
+    "text": "Visualization 1\nA rotated bar chart which displays the top 10 Himalayan mountains by total expeditions. The order of the mountains is in descending order by total expeditions. Mt. Everest claims the title for most popular, while Mt. Annapurna I is the least popular.\n\n\n\n\n\nThe top 10 Himalayan mountains by total expeditions from 1905 to 2019"
+  },
+  {
+    "objectID": "portfolio-project1/Portofolio_pt1.html#visualization-2",
+    "href": "portfolio-project1/Portofolio_pt1.html#visualization-2",
+    "title": "Project: Analyzing The Himalayan Mountain Range",
+    "section": "Visualization 2",
+    "text": "Visualization 2\nA side by side comparison of the summit rate (reaching the top of a mountain) and death rate. A ratio was constructed, as some mountains have a vastly higher number of total expeditions of others. Also because of this, we are only observing mountains among the top 10 most climbed. Both bar charts are ordered in descending summit rate, to show easy comparison of summits and deaths among the mountains. We can easily see that most mountains with a higher summit rate have a lower death rate. Observing Mt. Everest and Mt. Annapurna I again, we can see Everest among the top 3 in successful summit rate and death rate, while Annapurna I is dead last in summit and death rate.\n\n\n\n\n\nSide by side comparison of summit and death rate among the Himalayas"
+  },
+  {
+    "objectID": "portfolio-project1/Portofolio_pt1.html#visualization-3",
+    "href": "portfolio-project1/Portofolio_pt1.html#visualization-3",
+    "title": "Project: Analyzing The Himalayan Mountain Range",
+    "section": "Visualization 3",
+    "text": "Visualization 3\nThis bar chart stacks the number of deaths on top of the number of successful summits in the Himalayan mountain range by month. We can easily see that the two most popular months are April and September, as the weather is less extreme. These most popular months claim the most successful summits and the most lives, showing that it is dangerous throughout the year to climnb in the Himalayas.\n\n\n\n\n\nObserving the deaths and summits among the Himalayan mountain range by month"
   },
   {
     "objectID": "index.html",
@@ -26,5 +54,12 @@
     "title": "Dalton Garcia",
     "section": "Experience",
     "text": "Experience\nCupertino Cougars Ice Hockey | 12U Head Coach | August 2024 - present"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site:\nHi, my name is Dalton Garcia and I am a third year Statistics and Data Science major. In my free time, I enjoy playing hockey, surfing, and being outdoors!"
   }
 ]

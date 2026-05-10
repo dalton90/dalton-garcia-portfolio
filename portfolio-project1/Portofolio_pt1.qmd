@@ -1,0 +1,190 @@
+---
+title: "Portfolio Part 2 Plan"
+author: "Dalton Garcia"
+
+  
+---
+
+## Data Description
+
+1)  My data source is from tidytuesdays and it is a set on Himalayan climbing expeditions.
+
+2)  The three datasets consist of Himalayan peak, expedition, and members information. We will only be focusing on the peak and expedition datasets.
+
+3)  My research questions that I hope to answer are:
+
+  i)  What Himalayan peaks have the highest summit/survival rate? (Which mountains have been climbed the most with the least amount of deaths?)
+  ii) What time of the year has the most successful summits? (No injuries/deaths)
+  iii) What peak has the quickest average successful summits?
+
+## Data Visualization
+
+1)  
+  i)  Interactive bar chart that displays successful summit rate and has the statistics of \# of summits and \# of deaths when hovered on.
+  ii) Heatmap by month with a gradient color palette denoting an increase of deaths/accidents.
+  iii) Perhaps 1 visualization of the quickest summits and then 1 visualization of the safest summits. \
+
+2) I want to highlight the peaks that have the least amount of accidents and the time of year that has the least amount of accidents. I plan to do that by making my main focus of each visualization to be these issues.
+
+3) I will need to do some data cleaning to filter certain outcomes of each expedition and create a number of new variables from the existing data in the set.
+
+## Data Cleaning
+
+3)  Do you need to filter your data? How? I will have to filter my expeditions by termination reason. For those expedition of success, I must filter this variable to only include those. This also applies for the expeditions where anyone got injured or died.
+
+4)  Do you need to create any new variables? What variables? How? Yes, I need to create a duration variable. I will take the difference of the "highpoint_date"/termination_date" and basecamp_data" to find the duration of the trek.
+
+5)  Do you need to add new data (join) to your data? What data? How? I must join my peak dataset with my expedition dataset. I will do this with a left join with the "peak_name" variable.
+
+
+## Part 1- Data Cleaning
+```{r}
+library(tidyverse)
+#install.packages("ggiraph")
+library(ggiraph)
+library(patchwork)
+library(lubridate)
+
+```
+
+
+```{r}
+#| label: load-in-data
+#| eval: false
+#laoding in Tidy Tuesday Data
+members <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2020/2020-09-22/members.csv')
+expeditions <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2020/2020-09-22/expeditions.csv')
+peaks <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2020/2020-09-22/peaks.csv')
+#write.csv(members, "data-raw/members.csv")
+#write.csv(expeditions, "data-raw/expeditions.csv")
+#write.csv(peaks, "data-raw/peaks.csv")
+```
+
+```{r}
+#| label: cleaning-data
+#| eval: false
+glimpse(expeditions)
+#added columns denoting if climb was successful or if any deaths occurred
+expeditions <- expeditions |>
+  mutate(climb_success = case_when(
+    termination_reason == "Success (main peak)" ~ 1,
+    termination_reason == "Success (subpeak)" ~ 1,
+    termination_reason == "Success (claimed)" ~ 1,
+    .default = 0),
+          death_on_exp = if_else(member_deaths + hired_staff_deaths > 0, 1, 0))
+            
+#joined peaks and expeditions dataset to add height of peaks, dropped unused columns         
+peak_expeditions <- expeditions |>
+  left_join(peaks |> select(peak_name, height_metres), by = c('peak_name')) |>
+  select(-oxygen_used, trekking_agency)
+
+
+peak_expeditions1 <- peak_expeditions |>
+    group_by(peak_name) |>
+  summarize(total_expeditions = n(),
+            successful_treks = sum(climb_success),
+            death_on_trek = sum(death_on_exp)) |>
+  mutate(summit_rate = successful_treks/total_expeditions,
+         death_rate = death_on_trek/total_expeditions) |>
+  filter(total_expeditions >= 50) 
+
+#write.csv(peak_expeditions, "data-clean/peak_expeditions.csv")
+#write.csv(peak_expeditions1, "data-clean/peakexpeditions1.csv")
+```
+
+
+```{r}
+#| label: bar-plot-most-popular
+#summit rate depends on things like weather, running out of food, turning back for various reasons, aka not reaching the top
+
+peak_expeditions1 |>
+  arrange(desc(total_expeditions)) |>
+  head(10) |>
+  #top 10 peaks by total # of expeditions
+  ggplot(aes(y = fct_reorder(peak_name, total_expeditions), x = total_expeditions, fill = peak_name)) +
+  geom_col() +
+  scale_fill_brewer(palette = "Spectral") +
+  labs(
+    title = "Most Popular Himalayan Peaks by Total Expeditions (1905-2019)",
+    y = "Peak Name",
+    x = "Number of Expeditions"
+  )  +
+  theme_bw() +
+  theme(legend.position = "none")
+
+```
+
+```{r}
+#| label: bar-chart-summit-rate
+p1 <- peak_expeditions1 |>
+  arrange(desc(total_expeditions)) |>
+  head(10) |> 
+    ggplot(aes(y = fct_reorder(peak_name, summit_rate), x = death_rate, fill = peak_name)) +
+  geom_col_interactive() +
+  scale_fill_brewer(palette = "Spectral") +
+  labs(
+    y = "Name of Peak",
+    x = "Death Rate"
+  )  +
+  theme_bw() +
+  theme(legend.position = "none")
+```
+
+
+```{r}
+#| label: bar-chart-death-rate
+p2 <- peak_expeditions1 |>
+  arrange(desc(total_expeditions)) |>
+  head(10) |> 
+    ggplot(aes(y = fct_reorder(peak_name, summit_rate), x = summit_rate, fill = peak_name)) +
+  geom_col() +
+  scale_fill_brewer(palette = "Spectral") +
+  labs(
+    y = "Name of Peak",
+    x = "Summit Rate"
+  )  +
+  theme_bw() +
+  theme(legend.position = "none")
+```
+
+```{r}
+#| label: summit-death-comparison
+p2 + p1 +
+  plot_annotation(
+    title = "Summit Rate and Death Rate Among 10 Most Popular Himalayan Peaks (1905-2019)"
+  )
+```
+
+
+```{r}
+#| label: deaths-and-summits
+top5_peaks <- peak_expeditions1 |>
+  group_by(peak_name) |>
+  summarize(total = n()) |>
+  slice_max(total, n = 5) |>
+  pull(peak_name)
+
+peak_expeditions |>
+  filter(!is.na(basecamp_date), peak_name %in% top5_peaks) |>
+  mutate(month = month(ymd(basecamp_date), label = TRUE, abbr = TRUE)) |>
+  group_by(peak_name, month) |>
+  summarize(total_expeditions = n(),
+            success_treks = sum(climb_success),
+            death_on_trek = sum(death_on_exp), .groups = "drop") |>
+    pivot_longer(cols = c(success_treks, death_on_trek),
+               names_to = "outcome",
+               values_to = "count") |>
+  ggplot(aes(x = month, y = count, fill = outcome)) +
+  scale_fill_brewer(palette = "Spectral", name = "Death or Success",
+                    labels = c("Death on Trek", "Summit Reached")) +
+  geom_col() +
+  labs(title = "Breakdown of Deaths and Summits by Month Amongst the Himalayas",
+       subtitle = "The most popular months see the most successful summits and the most deaths",
+       x = "Month",
+       y = "Count") +
+  theme_bw()
+
+```
+
+
+

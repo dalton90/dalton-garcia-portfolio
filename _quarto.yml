@@ -1,6 +1,7 @@
 project:
   type: website
   output-dir: docs
+  
 website:
   title: "Dalton Garcia's ePortfolio"
   navbar:
@@ -9,6 +10,8 @@ website:
         text: "Home"
       - href: about.qmd  
         text: "About Me"
+      - href: portfolio-project1/Portofolio_pt1.qmd  
+        text: "Himalayan Exploratory Analysis"
 
 format:
   html:
